@@ -58,11 +58,15 @@ h2 {
 	margin: 0 auto;
 	justify-content: space-between;
 	padding: 0;
-	/* gap 太寬 需調整*/
+	gap: 5px;
+	/* 空白太多 */
 }
 
 .contents li {
 	text-align:start;
+	padding: 80px 200px;
+	/* padding: 80px 200px; */
+	/* position: absolute; */
 	margin: 5px 5px;
 	background-color: #97a2b3;
 }
