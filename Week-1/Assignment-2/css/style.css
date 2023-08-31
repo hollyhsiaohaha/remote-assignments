@@ -56,17 +56,16 @@ h2 {
 	flex-direction: row;
 	flex-wrap: wrap;
 	margin: 0 auto;
-	justify-content: space-between;
+	justify-content: center;
 	padding: 0;
-	gap: 5px;
-	/* 空白太多 */
 }
 
 .contents li {
 	text-align:start;
-	padding: 80px 200px;
-	/* padding: 80px 200px; */
-	/* position: absolute; */
+	padding-top: 0px;
+	padding-bottom: 80px;
+	padding-left: 200px;
+	padding-right: 200px;
 	margin: 5px 5px;
 	background-color: #97a2b3;
 }
