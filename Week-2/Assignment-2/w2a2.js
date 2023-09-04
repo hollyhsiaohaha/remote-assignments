@@ -1,6 +1,10 @@
 function avg(data) {
   // your code here
+  let priceSum = 0;
+  data.products.forEach(product => priceSum += product.price);
+  return priceSum / data.size;
 }
+
 console.log(
   avg({
     size: 3,
