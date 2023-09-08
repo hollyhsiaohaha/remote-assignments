@@ -11,7 +11,7 @@ class Banner extends Component {
   render() {
     return (
       <div className="main-banner">
-        <h1 id="banner">Welcome Message</h1>
+        <h1 id="banner">{ this.beforeMessage }</h1>
       </div>
     )
   }
