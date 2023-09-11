@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>W3 assignments</title>
+    <script>
+      const xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4) {
+          window.location = '/myName';
+        }
+      }
+
+      function submitName() {
+        const userInput = document.getElementById('user_name_input');
+        if (!userInput.value) {
+          return document.getElementById('msg').innerHTML = 'Please enter user name in the input box!';
+        }
+        xhr.open('GET', `/trackName?name=${userInput.value}`);
+        xhr.send();
+      }
+    </script>
+  </head>
+  <body>
+    <p>Input username</p>
+    <input id="user_name_input" type="text">
+    <button id="submit-btn" onclick="submitName()">Submit</button>
+    <div id="msg"></div>
+  </body>
+</html>
