@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>W3 assignments</title>
+    <script>
+      const xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            document.getElementById('ajax').innerHTML = `The sum result is: ${xhr.responseText}`;
+          } else {
+            document.getElementById('ajax').innerHTML = 'Something went wrong';
+          }
+        }
+      };
+
+      function sendAjax() {
+        const userInput = document.getElementById('user_input');
+        xhr.open('GET', `/data?number=${userInput.value}`);
+        xhr.send();
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Sum cool stuff</h1>
+    <input type="text" id="user_input">
+    <button type="load" onclick="sendAjax()">Sum!</button>
+    <div id="ajax"></div>
+  </body>
+</html>
