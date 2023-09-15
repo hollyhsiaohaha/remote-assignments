@@ -28,7 +28,10 @@ app.get('/data', (req, res) => {
   }
   const num = Number(number);
   if (!Number.isInteger(num)) {
-    return res.send('Wrong Parameter(should be interger)');
+    return res.send('Wrong Parameter (should be interger)');
+  }
+  if (num < 0) {
+    return res.send('Wrong Parameter (should be greater than 0)');
   }
   const sum = ((num + 1) * num) / 2;
   return res.send(`${sum}`);
