@@ -2,28 +2,48 @@
 <html lang="en">
   <head>
     <title>W3 assignments</title>
-    <script>
-      const xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = () => {
-        if (xhr.readyState === 4) {
-          window.location = '/myName';
-        }
-      }
-
-      function submitName() {
-        const userInput = document.getElementById('user_name_input');
-        if (!userInput.value) {
-          return document.getElementById('msg').innerHTML = 'Please enter user name in the input box!';
-        }
-        xhr.open('GET', `/trackName?name=${userInput.value}`);
-        xhr.send();
-      }
-    </script>
   </head>
   <body>
     <p>Input username</p>
     <input id="user_name_input" type="text">
-    <button id="submit-btn" onclick="submitName()">Submit</button>
+    <!-- Method 1: AJAX -->
+    <!-- <button id="submit-btn" onclick="submitName()">Submit</button> -->
+    <!-- Method 2: Fetch() -->
+    <button id="submit-btn">Submit</button>
     <div id="msg"></div>
+    <script>
+      //=== Method 1: AJAX ===
+      // const xhr = new XMLHttpRequest();
+      // xhr.onreadystatechange = () => {
+        //   if (xhr.readyState === 4) {
+          //     window.location = '/myName';
+          //   }
+          // }
+          
+          // function submitName() {
+            //   const userInput = document.getElementById('user_name_input');
+            //   if (!userInput.value) {
+              //     return document.getElementById('msg').innerHTML = 'Please enter user name in the input box!';
+              //   }
+              //   xhr.open('GET', `/trackName?name=${userInput.value}`);
+              //   xhr.send();
+              // }
+
+      //=== Method 2: Fetch() ===
+      const btnElem = document.getElementById('submit-btn');
+      const userInputElem = document.getElementById('user_name_input');
+      const msgElem = document.getElementById('msg');
+
+      function addNameToCookie() {
+        if (!userInputElem.value) {
+          msgElem.innerHTML = 'Please enter user name in the input box!';
+          return;
+        }
+        fetch(`/trackName?name=${userInputElem.value}`)
+        .then(() => window.location.reload())
+        .catch(error => console.log('somthing went wrong!', error))
+      }
+      btnElem.addEventListener('click', addNameToCookie);
+    </script>
   </body>
 </html>

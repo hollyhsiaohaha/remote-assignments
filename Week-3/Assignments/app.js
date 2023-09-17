@@ -21,33 +21,41 @@ app.get('/', (req, res) => res.send('Week3 assignment api'));
 app.get('/data', (req, res) => {
   const { number } = req.query;
   if (!number) {
-    return res.send('Lack of Parameter');
+    // return res.send('Lack of Parameter'); //for AJAX
+    return res.send({ result: 'Lack of Parameter' });
   }
   if (!(Number(number))) {
-    return res.send('Wrong Parameter');
+    // return res.send('Wrong Parameter'); //for AJAX
+    return res.send({ result: 'Wrong Parameter' });
   }
   const num = Number(number);
   if (!Number.isInteger(num)) {
-    return res.send('Wrong Parameter (should be interger)');
+    // return res.send('Wrong Parameter (should be interger)'); //for AJAX
+    return res.send({ result: 'Wrong Parameter (should be interger)' });
   }
   if (num < 0) {
-    return res.send('Wrong Parameter (should be greater than 0)');
+    // return res.send('Wrong Parameter (should be greater than 0)'); //for AJAX
+    return res.send({ result: 'Wrong Parameter (should be greater than 0)' });
   }
   const sum = ((num + 1) * num) / 2;
-  return res.send(`${sum}`);
+  // return res.send(`${sum}`); //for AJAX
+  return res.send({ result: `${sum}` });
 });
 
 app.get('/myName', (req, res) => {
   const { userName } = req.cookies;
   if (userName) {
+    // return res.send({ result: `Your user name is: ${userName}` });
     return res.send(`Your user name is: ${userName}`);
   }
   return res.render('trackName.html');
 });
 
 app.get('/trackName', (req, res) => {
-  res.cookie('userName', req.query.name);
-  return res.send('cookie created'); // 如果刪掉這行就會報錯？why
+  const userName = req.query.name;
+  res.cookie('userName', userName);
+  return res.send({ result: `user name: ${userName} has been ` });
+  // res.end(); // 也可以呼叫 res.end() ， res.send() 內部已經幫忙呼叫了
 });
 
 app.listen(port, () => {

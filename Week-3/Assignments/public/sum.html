@@ -2,29 +2,48 @@
 <html lang="en">
   <head>
     <title>W3 assignments</title>
-    <script>
-      const xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = () => {
-        if (xhr.readyState === 4) {
-          if (xhr.status === 200) {
-            document.getElementById('ajax').innerHTML = `The sum result is: ${xhr.responseText}`;
-          } else {
-            document.getElementById('ajax').innerHTML = 'Something went wrong';
-          }
-        }
-      };
-
-      function sendAjax() {
-        const userInput = document.getElementById('user_input');
-        xhr.open('GET', `/data?number=${userInput.value}`);
-        xhr.send();
-      }
-    </script>
   </head>
   <body>
     <h1>Sum cool stuff</h1>
     <input type="text" id="user_input">
-    <button type="load" onclick="sendAjax()">Sum!</button>
-    <div id="ajax"></div>
+    <!-- Method 1: AJAX -->
+    <!-- <button type="load" onclick="sendAjax()">Sum!</button> -->
+    <!-- Method 2: Fetch() -->
+    <button type="load" id="sum-btn">Sum!</button>
+    <div id="result"></div>
+    <script>
+      //=== Method 1: AJAX ===
+      // const xhr = new XMLHttpRequest();
+      // xhr.onreadystatechange = () => {
+      //   if (xhr.readyState === 4) {
+      //     if (xhr.status === 200) {
+      //       document.getElementById('result').innerHTML = `The sum result is: ${xhr.responseText}`;
+      //     } else {
+      //       document.getElementById('result').innerHTML = 'Something went wrong';
+      //     }
+      //   }
+      // };
+
+      // function sendAjax() {
+      //   const userInput = document.getElementById('user_input');
+      //   xhr.open('GET', `/data?number=${userInput.value}`);
+      //   xhr.send();
+      // }
+
+      //=== Method 2: Fetch() ===
+      // 若要使用 getElementById 等，需把 script 放在最後
+      const btnElem = document.getElementById('sum-btn');
+      const userInputElem = document.getElementById('user_input');
+      const resultElem = document.getElementById('result');
+
+      function fetchSum() {
+        fetch(`/data?number=${userInputElem.value}`)
+          .then(response => response.json())
+          .then(data => resultElem.innerHTML = `The sum result is: ${data.result}`)
+          .catch(error => console.log('somthing went wrong!', error))
+      }
+
+      btnElem.addEventListener('click', fetchSum); //func 不能加括弧
+    </script>
   </body>
 </html>
