@@ -1,0 +1,39 @@
+<head>
+  <title>w4a2</title>
+</head>
+<body>
+  <h1>Cool products!</h1>
+  <ul id="products-container"></ul>
+  <script>
+    function ajax(src, callback) {
+      xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4) {
+          console.log(xhr.responseText);
+          callback(JSON.parse(xhr.responseText));
+        }
+      }
+    xhr.open('GET', src);
+    xhr.send();
+    }
+
+    function render(data) {
+      const productsElem = document.getElementById('products-container');
+      for (product of data) {
+        const productElem = document.createElement('li');
+        productElem.innerHTML = `
+        <p>${product.name}: ${product.price} 元</p>
+        <p>${product.description}</p>
+        `;
+        productsElem.appendChild(productElem);
+      }
+    }
+
+    ajax(
+      'https://remote-assignment.s3.ap-northeast-1.amazonaws.com/products',
+      function (response) {
+        render(response);
+      }
+    );
+  </script>
+</body>
