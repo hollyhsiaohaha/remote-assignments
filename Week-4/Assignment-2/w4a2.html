@@ -5,6 +5,7 @@
   <h1>Cool products!</h1>
   <ul id="products-container"></ul>
   <script>
+    // === Method 1: async functions (ajax) ===
     function ajax(src, callback) {
       xhr = new XMLHttpRequest();
       xhr.onreadystatechange = () => {
@@ -13,10 +14,19 @@
           callback(JSON.parse(xhr.responseText));
         }
       }
-    xhr.open('GET', src);
-    xhr.send();
+      xhr.open('GET', src);
+      xhr.send();
+    }
+    
+    // === Method 2: async functions (fetch) ===
+    function fetchProducts (url) {
+      fetch(url)
+        .then(response => response.json())
+        .then(data => render(data))
+        .catch(err => console.log('something went wrong -->', err))
     }
 
+    //  helper functions
     function render(data) {
       const productsElem = document.getElementById('products-container');
       for (product of data) {
@@ -35,5 +45,7 @@
         render(response);
       }
     );
+
+    // fetchProducts('https://remote-assignment.s3.ap-northeast-1.amazonaws.com/products');
   </script>
 </body>
