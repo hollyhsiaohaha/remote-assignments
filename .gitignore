@@ -1,0 +1,21 @@
+
+# To prevent upload pdf files
+/pdfs
+
+# VS code
+.DS_Store
+
+# WebStrom
+.idea
+
+# packages
+*node_modules
+
+# ES lin
+.eslintrc.json
+
+# environment arg
+.env
+
+# other resource
+*reference
