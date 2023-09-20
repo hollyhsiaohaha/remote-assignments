@@ -27,16 +27,13 @@ async function getUserByemail(email) {
   return rows[0];
 }
 
-async function insertUser(email, password) {
+async function insertUser(email, salt, passwordHash) {
   const [result] = await pool.query(
-    'INSERT INTO user (email, password) VALUE (?, ?)',
-    [email, password],
+    'INSERT INTO user (email, salt, password_hash) VALUE (?, ?, ?)',
+    [email, salt, passwordHash],
   );
   return getUserById(result.insertId);
 }
-// getAllUsers()
-//   .then(result => console.log(result));
-// checkPasswordByemail('ae.log(result));
 
 module.exports = {
   getAllUsers,
