@@ -8,8 +8,6 @@ function hash(string) {
   return crypto.createHash('sha256').update(string).digest('hex');
 }
 
-// console.log(hash('aaab'));
-
 module.exports = {
   generateSalt,
   hash,
