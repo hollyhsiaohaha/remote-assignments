@@ -1,0 +1,29 @@
+head
+  title home
+  style.
+    .form-container {
+    display: flex;
+    }
+    .form-container form {
+    margin: 10px;
+    }
+h1 Hi stranger
+#msg Please log-in or log-up
+#forms.form-container
+  form#login-form(onsubmit='login(event)')
+    label Log-in
+    p email
+    input#login-email(type='text')
+    p password
+    input#login-password(type='password')
+    br
+    button(type='submit') log-in
+  form#logup-form(onsubmit='logup(event)')
+    label Log-up
+    p email
+    input#logup-email(type='text')
+    p password
+    input#logup-password(type='password')
+    br
+    button(type='submit') log-up
+script(src='static/home.js')

@@ -11,10 +11,7 @@ app.use(bodyParser.urlencoded({ extend: false }));
 app.use(cookieParser());
 app.use('/static', express.static('public'));
 
-// eslint-disable-next-line import/no-extraneous-dependencies
-app.engine('html', require('ejs').renderFile);
-
-app.set('view engine', 'ejs');
+app.set('view engine', 'pug');
 
 const mainRoutes = require('./routes');
 const apiRoutes = require('./routes/api');
