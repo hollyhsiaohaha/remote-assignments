@@ -7,7 +7,12 @@ async function getAllMember() {
 }
 
 async function checkMemberExist(inputEmail, inputPassword) {
+  if (!inputEmail || !inputPassword) {
+    return { status: 'fail', message: 'email and password should not be empty' };
+  }
+
   const member = await model.getUserByemail(inputEmail);
+
   if (!member) {
     return { status: 'fail', message: 'member not exist' };
   }
@@ -18,6 +23,9 @@ async function checkMemberExist(inputEmail, inputPassword) {
 }
 
 async function createNewMember(inputEmail, inputPassword) {
+  if (!inputEmail || !inputPassword) {
+    return { status: 'fail', message: 'email and password should not be empty' };
+  }
   const member = await model.getUserByemail(inputEmail);
   const salt = hashCrypto.generateSalt();
   const passwordHash = hashCrypto.hash(inputPassword + salt);
